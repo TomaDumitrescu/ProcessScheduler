@@ -10,8 +10,12 @@
 //! ```
 //!
 
-// TODO delete this example
-mod empty;
-pub use empty::Empty;
+// import schedulers
+mod round_robin;
+pub use round_robin::RoundRobin;
 
-// TODO import your schedulers here
+mod round_robin_pq;
+pub use round_robin_pq::RoundRobinPQ;
+
+mod cfs;
+pub use cfs::CFS;

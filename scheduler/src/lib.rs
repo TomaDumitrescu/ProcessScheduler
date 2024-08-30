@@ -8,7 +8,7 @@ use std::num::NonZeroUsize;
 
 mod scheduler;
 
-use schedulers::Empty;
+use schedulers::{RoundRobin, RoundRobinPQ, CFS};
 
 pub use crate::scheduler::{
     Pid, Process, ProcessState, Scheduler, SchedulingDecision, StopReason, Syscall, SyscallResult,
@@ -16,8 +16,8 @@ pub use crate::scheduler::{
 
 mod schedulers;
 
-// TODO import your scheduler here
-// This example imports the Empty scheduler
+use std::collections::VecDeque;
+
 
 /// Returns a structure that implements the `Scheduler` trait with a round robin scheduler policy
 ///
@@ -30,7 +30,15 @@ mod schedulers;
 ///                                 the `minimum_remaining_timeslice` value.
 #[allow(unused_variables)]
 pub fn round_robin(timeslice: NonZeroUsize, minimum_remaining_timeslice: usize) -> impl Scheduler {
-    Empty
+    RoundRobin {
+        ready_q: VecDeque::new(),
+        wait_q: VecDeque::new(),
+        sleep_q: VecDeque::new(),
+        timeslice: timeslice,
+        minimum_remaining_timeslice: minimum_remaining_timeslice,
+        init_pid: 0,
+        current_time: 0,
+    }
 }
 
 /// Returns a structure that implements the `Scheduler` trait with a priority queue scheduler policy
@@ -46,7 +54,16 @@ pub fn priority_queue(
     timeslice: NonZeroUsize,
     minimum_remaining_timeslice: usize,
 ) -> impl Scheduler {
-    Empty
+    RoundRobinPQ {
+        ready_proc: VecDeque::new(),
+        waiting_queue: VecDeque::new(),
+        sleep_queue: VecDeque::new(),
+        timeslice: timeslice,
+        minimum_remaining_timeslice: minimum_remaining_timeslice,
+        init_pid: 0,
+        current_time: 0,
+        panic_state: false,
+    }
 }
 
 /// Returns a structure that implements the `Scheduler` trait with a simplified [cfs](https://opensource.com/article/19/2/fair-scheduling-linux) scheduler policy
@@ -60,5 +77,14 @@ pub fn priority_queue(
 ///                                 the `minimum_remaining_timeslice` value.
 #[allow(unused_variables)]
 pub fn cfs(cpu_time: NonZeroUsize, minimum_remaining_timeslice: usize) -> impl Scheduler {
-    Empty
+    CFS {
+        ready_proc: VecDeque::new(),
+        waiting_queue: VecDeque::new(),
+        sleep_queue: VecDeque::new(),
+        timeslice: cpu_time,
+        minimum_remaining_timeslice: minimum_remaining_timeslice,
+        init_pid: 0,
+        current_time: 0,
+        panic_state: false,
+    }
 }
