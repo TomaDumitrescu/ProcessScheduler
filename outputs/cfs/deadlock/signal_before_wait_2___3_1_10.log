@@ -1,0 +1,38 @@
+===== Iteration: 1 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	0	0	0	vruntime=0
+Syscall Fork(0), remaining 9 -> Pid(2)
+
+
+===== Iteration: 2 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	1	1	0	vruntime=1
+2	READY		0	0	0	0	vruntime=1
+Syscall Signal(2), remaining 4 -> Success
+
+
+===== Iteration: 3 =====
+Run 1 for 4 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	2	2	0	vruntime=2
+2	READY		0	1	0	0	vruntime=1
+Syscall Wait(2), remaining 3 -> Success
+
+
+===== Iteration: 4 =====
+Run 2 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	EVENT 2		0	3	3	0	vruntime=3
+2	RUNNING		0	2	0	0	vruntime=1
+Syscall Wait(2), remaining 4 -> Success
+
+
+===== Iteration: 5 =====
+Deadlock, unable to schedule anymore processes
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	EVENT 2		0	9	3	0	vruntime=3
+2	EVENT 2		0	8	1	5	vruntime=7
+
+

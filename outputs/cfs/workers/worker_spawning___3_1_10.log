@@ -1,0 +1,180 @@
+===== Iteration: 1 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	0	0	0	vruntime=0
+Syscall Fork(5), remaining 9 -> Pid(2)
+
+
+===== Iteration: 2 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	1	1	0	vruntime=1
+2	READY		5	0	0	0	vruntime=1
+Expired -> Success
+
+
+===== Iteration: 3 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	6	1	5	vruntime=6
+2	RUNNING		5	5	0	0	vruntime=1
+Expired -> Success
+
+
+===== Iteration: 4 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	11	1	5	vruntime=6
+2	READY		5	10	0	5	vruntime=6
+Expired -> Success
+
+
+===== Iteration: 5 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	16	1	10	vruntime=11
+2	RUNNING		5	15	0	5	vruntime=6
+Expired -> Success
+
+
+===== Iteration: 6 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	21	1	10	vruntime=11
+2	READY		5	20	0	10	vruntime=11
+Expired -> Success
+
+
+===== Iteration: 7 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	26	1	15	vruntime=16
+2	RUNNING		5	25	0	10	vruntime=11
+Expired -> Success
+
+
+===== Iteration: 8 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	31	1	15	vruntime=16
+2	READY		5	30	0	15	vruntime=16
+Expired -> Success
+
+
+===== Iteration: 9 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	36	1	20	vruntime=21
+2	RUNNING		5	35	0	15	vruntime=16
+Expired -> Success
+
+
+===== Iteration: 10 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	41	1	20	vruntime=21
+2	READY		5	40	0	20	vruntime=21
+Expired -> Success
+
+
+===== Iteration: 11 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	46	1	25	vruntime=26
+2	RUNNING		5	45	0	20	vruntime=21
+Syscall Fork(5), remaining 4 -> Pid(3)
+
+
+===== Iteration: 12 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	47	1	25	vruntime=26
+2	RUNNING		5	46	1	20	vruntime=22
+3	READY		5	0	0	0	vruntime=22
+Syscall Exit, remaining 2 -> Success
+
+
+===== Iteration: 13 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	48	1	25	vruntime=26
+3	RUNNING		5	1	0	0	vruntime=22
+Expired -> Success
+
+
+===== Iteration: 14 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	53	1	25	vruntime=26
+3	READY		5	6	0	5	vruntime=27
+Expired -> Success
+
+
+===== Iteration: 15 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	58	1	30	vruntime=31
+3	RUNNING		5	11	0	5	vruntime=27
+Expired -> Success
+
+
+===== Iteration: 16 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	63	1	30	vruntime=31
+3	READY		5	16	0	10	vruntime=32
+Expired -> Success
+
+
+===== Iteration: 17 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	68	1	35	vruntime=36
+3	RUNNING		5	21	0	10	vruntime=32
+Expired -> Success
+
+
+===== Iteration: 18 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	73	1	35	vruntime=36
+3	READY		5	26	0	15	vruntime=37
+Expired -> Success
+
+
+===== Iteration: 19 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	78	1	40	vruntime=41
+3	RUNNING		5	31	0	15	vruntime=37
+Expired -> Success
+
+
+===== Iteration: 20 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	83	1	40	vruntime=41
+3	READY		5	36	0	20	vruntime=42
+Expired -> Success
+
+
+===== Iteration: 21 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	88	1	45	vruntime=46
+3	RUNNING		5	41	0	20	vruntime=42
+Syscall Exit, remaining 4 -> Success
+
+
+===== Iteration: 22 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	89	1	45	vruntime=46
+Syscall Exit, remaining 4 -> Success
+
+
+===== Iteration: 23 =====
+Done, no more processes
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+
+

@@ -1,0 +1,374 @@
+===== Iteration: 1 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	0	0	0	
+Syscall Fork(3), remaining 2 -> Pid(2)
+
+
+===== Iteration: 2 =====
+Run 1 for 2 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	1	1	0	
+2	READY		3	0	0	0	
+Syscall Fork(5), remaining 1 -> Pid(3)
+
+
+===== Iteration: 3 =====
+Run 1 for 1 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	2	2	0	
+2	READY		3	1	0	0	
+3	READY		5	0	0	0	
+Expired -> Success
+
+
+===== Iteration: 4 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	3	2	1	
+2	READY		3	2	0	0	
+3	RUNNING		5	1	0	0	
+Syscall Sleep(1), remaining 2 -> Success
+
+
+===== Iteration: 5 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	4	2	1	
+2	RUNNING		3	3	0	0	
+3	SLEEP		5	2	1	0	
+Expired -> Success
+
+
+===== Iteration: 6 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	7	2	1	
+2	READY		2	6	0	3	
+3	RUNNING		5	5	1	0	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 7 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	10	2	1	
+2	RUNNING		2	9	0	3	
+3	SLEEP		5	8	2	2	
+Expired -> Success
+
+
+===== Iteration: 8 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	13	2	1	
+2	READY		1	12	0	6	
+3	RUNNING		5	11	2	2	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 9 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	16	2	1	
+2	RUNNING		1	15	0	6	
+3	SLEEP		5	14	3	4	
+Expired -> Success
+
+
+===== Iteration: 10 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	19	2	1	
+2	READY		0	18	0	9	
+3	RUNNING		5	17	3	4	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 11 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	22	2	1	
+2	READY		0	21	0	9	
+3	SLEEP		5	20	4	6	
+Expired -> Success
+
+
+===== Iteration: 12 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	25	2	4	
+2	READY		0	24	0	9	
+3	RUNNING		5	23	4	6	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 13 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	28	2	4	
+2	RUNNING		0	27	0	9	
+3	SLEEP		5	26	5	8	
+Syscall Exit, remaining 1 -> Success
+
+
+===== Iteration: 14 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	30	2	4	
+3	RUNNING		5	28	5	8	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 15 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	33	2	4	
+3	SLEEP		5	31	6	10	
+Expired -> Success
+
+
+===== Iteration: 16 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	36	2	7	
+3	RUNNING		5	34	6	10	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 17 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	39	2	7	
+3	SLEEP		5	37	7	12	
+Expired -> Success
+
+
+===== Iteration: 18 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	42	2	10	
+3	RUNNING		5	40	7	12	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 19 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	45	2	10	
+3	SLEEP		5	43	8	14	
+Expired -> Success
+
+
+===== Iteration: 20 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	48	2	13	
+3	RUNNING		5	46	8	14	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 21 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	51	2	13	
+3	SLEEP		5	49	9	16	
+Expired -> Success
+
+
+===== Iteration: 22 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	54	2	16	
+3	RUNNING		5	52	9	16	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 23 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	57	2	16	
+3	SLEEP		5	55	10	18	
+Expired -> Success
+
+
+===== Iteration: 24 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	60	2	19	
+3	RUNNING		5	58	10	18	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 25 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	63	2	19	
+3	SLEEP		5	61	11	20	
+Expired -> Success
+
+
+===== Iteration: 26 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	66	2	22	
+3	RUNNING		5	64	11	20	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 27 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	69	2	22	
+3	SLEEP		5	67	12	22	
+Expired -> Success
+
+
+===== Iteration: 28 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	72	2	25	
+3	RUNNING		5	70	12	22	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 29 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	75	2	25	
+3	SLEEP		5	73	13	24	
+Expired -> Success
+
+
+===== Iteration: 30 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	78	2	28	
+3	RUNNING		5	76	13	24	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 31 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	81	2	28	
+3	SLEEP		5	79	14	26	
+Expired -> Success
+
+
+===== Iteration: 32 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	84	2	31	
+3	RUNNING		5	82	14	26	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 33 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	87	2	31	
+3	SLEEP		5	85	15	28	
+Expired -> Success
+
+
+===== Iteration: 34 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	90	2	34	
+3	RUNNING		5	88	15	28	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 35 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	93	2	34	
+3	SLEEP		5	91	16	30	
+Expired -> Success
+
+
+===== Iteration: 36 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	96	2	37	
+3	RUNNING		5	94	16	30	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 37 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	99	2	37	
+3	SLEEP		5	97	17	32	
+Expired -> Success
+
+
+===== Iteration: 38 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	102	2	40	
+3	RUNNING		5	100	17	32	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 39 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	105	2	40	
+3	SLEEP		5	103	18	34	
+Expired -> Success
+
+
+===== Iteration: 40 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	108	2	43	
+3	RUNNING		5	106	18	34	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 41 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	111	2	43	
+3	SLEEP		5	109	19	36	
+Expired -> Success
+
+
+===== Iteration: 42 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	114	2	46	
+3	RUNNING		5	112	19	36	
+Syscall Sleep(1), remaining 0 -> Success
+
+
+===== Iteration: 43 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	117	2	46	
+3	SLEEP		5	115	20	38	
+Expired -> Success
+
+
+===== Iteration: 44 =====
+Run 3 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	120	2	49	
+3	RUNNING		5	118	20	38	
+Syscall Exit, remaining 0 -> Success
+
+
+===== Iteration: 45 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	123	2	49	
+Syscall Exit, remaining 1 -> Success
+
+
+===== Iteration: 46 =====
+Done, no more processes
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+
+

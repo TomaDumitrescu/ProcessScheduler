@@ -1,0 +1,106 @@
+===== Iteration: 1 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	0	0	0	
+Syscall Fork(5), remaining 4 -> Pid(2)
+
+
+===== Iteration: 2 =====
+Run 1 for 4 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	1	1	0	
+2	READY		5	0	0	0	
+Expired -> Success
+
+
+===== Iteration: 3 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	5	1	4	
+2	RUNNING		5	4	0	0	
+Expired -> Success
+
+
+===== Iteration: 4 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	10	1	4	
+2	READY		5	9	0	5	
+Expired -> Success
+
+
+===== Iteration: 5 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	15	1	9	
+2	RUNNING		5	14	0	5	
+Expired -> Success
+
+
+===== Iteration: 6 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	20	1	9	
+2	READY		5	19	0	10	
+Expired -> Success
+
+
+===== Iteration: 7 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	25	1	14	
+2	RUNNING		5	24	0	10	
+Expired -> Success
+
+
+===== Iteration: 8 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	30	1	14	
+2	READY		5	29	0	15	
+Expired -> Success
+
+
+===== Iteration: 9 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	35	1	19	
+2	RUNNING		5	34	0	15	
+Expired -> Success
+
+
+===== Iteration: 10 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	40	1	19	
+2	READY		5	39	0	20	
+Expired -> Success
+
+
+===== Iteration: 11 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	45	1	24	
+2	RUNNING		5	44	0	20	
+Syscall Exit, remaining 4 -> Success
+
+
+===== Iteration: 12 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	46	1	24	
+Expired -> Success
+
+
+===== Iteration: 13 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	51	1	29	
+Syscall Exit, remaining 3 -> Success
+
+
+===== Iteration: 14 =====
+Done, no more processes
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+
+

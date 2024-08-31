@@ -1,0 +1,58 @@
+===== Iteration: 1 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	0	0	0	
+Syscall Fork(0), remaining 2 -> Pid(2)
+
+
+===== Iteration: 2 =====
+Run 1 for 2 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	1	1	0	
+2	READY		0	0	0	0	
+Expired -> Success
+
+
+===== Iteration: 3 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	3	1	2	
+2	RUNNING		0	2	0	0	
+Expired -> Success
+
+
+===== Iteration: 4 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	6	1	2	
+2	READY		0	5	0	3	
+Expired -> Success
+
+
+===== Iteration: 5 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	READY		0	9	1	5	
+2	RUNNING		0	8	0	3	
+Syscall Exit, remaining 0 -> Success
+
+
+===== Iteration: 6 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	12	1	5	
+Expired -> Success
+
+
+===== Iteration: 7 =====
+Run 1 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	15	1	8	
+Syscall Exit, remaining 0 -> Success
+
+
+===== Iteration: 8 =====
+Done, no more processes
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+
+

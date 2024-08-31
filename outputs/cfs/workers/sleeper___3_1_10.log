@@ -1,0 +1,220 @@
+===== Iteration: 1 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	0	0	0	vruntime=0
+Syscall Fork(5), remaining 9 -> Pid(2)
+
+
+===== Iteration: 2 =====
+Run 1 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	1	1	0	vruntime=1
+2	READY		5	0	0	0	vruntime=1
+Syscall Sleep(110), remaining 4 -> Success
+
+
+===== Iteration: 3 =====
+Run 2 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	2	2	0	vruntime=2
+2	RUNNING		5	1	0	0	vruntime=1
+Syscall Fork(5), remaining 9 -> Pid(3)
+
+
+===== Iteration: 4 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	3	2	0	vruntime=2
+2	RUNNING		5	2	1	0	vruntime=2
+3	READY		5	0	0	0	vruntime=2
+Expired -> Success
+
+
+===== Iteration: 5 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	8	2	0	vruntime=2
+2	READY		5	7	1	5	vruntime=7
+3	RUNNING		5	5	0	0	vruntime=2
+Expired -> Success
+
+
+===== Iteration: 6 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	13	2	0	vruntime=2
+2	RUNNING		5	12	1	5	vruntime=7
+3	READY		5	10	0	5	vruntime=7
+Expired -> Success
+
+
+===== Iteration: 7 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	18	2	0	vruntime=2
+2	READY		5	17	1	10	vruntime=12
+3	RUNNING		5	15	0	5	vruntime=7
+Expired -> Success
+
+
+===== Iteration: 8 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	23	2	0	vruntime=2
+2	RUNNING		5	22	1	10	vruntime=12
+3	READY		5	20	0	10	vruntime=12
+Expired -> Success
+
+
+===== Iteration: 9 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	28	2	0	vruntime=2
+2	READY		5	27	1	15	vruntime=17
+3	RUNNING		5	25	0	10	vruntime=12
+Expired -> Success
+
+
+===== Iteration: 10 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	33	2	0	vruntime=2
+2	RUNNING		5	32	1	15	vruntime=17
+3	READY		5	30	0	15	vruntime=17
+Expired -> Success
+
+
+===== Iteration: 11 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	38	2	0	vruntime=2
+2	READY		5	37	1	20	vruntime=22
+3	RUNNING		5	35	0	15	vruntime=17
+Expired -> Success
+
+
+===== Iteration: 12 =====
+Run 2 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	43	2	0	vruntime=2
+2	RUNNING		5	42	1	20	vruntime=22
+3	READY		5	40	0	20	vruntime=22
+Syscall Fork(5), remaining 4 -> Pid(4)
+
+
+===== Iteration: 13 =====
+Run 2 for 3 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	44	2	0	vruntime=2
+2	RUNNING		5	43	2	20	vruntime=23
+3	READY		5	41	0	20	vruntime=22
+4	READY		5	0	0	0	vruntime=2
+Syscall Exit, remaining 2 -> Success
+
+
+===== Iteration: 14 =====
+Run 4 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	45	2	0	vruntime=2
+3	READY		5	42	0	20	vruntime=22
+4	RUNNING		5	1	0	0	vruntime=2
+Expired -> Success
+
+
+===== Iteration: 15 =====
+Run 4 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	50	2	0	vruntime=2
+3	READY		5	47	0	20	vruntime=22
+4	RUNNING		5	6	0	5	vruntime=7
+Expired -> Success
+
+
+===== Iteration: 16 =====
+Run 4 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	55	2	0	vruntime=2
+3	READY		5	52	0	20	vruntime=22
+4	RUNNING		5	11	0	10	vruntime=12
+Expired -> Success
+
+
+===== Iteration: 17 =====
+Run 4 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	60	2	0	vruntime=2
+3	READY		5	57	0	20	vruntime=22
+4	RUNNING		5	16	0	15	vruntime=17
+Expired -> Success
+
+
+===== Iteration: 18 =====
+Run 3 for 5 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	65	2	0	vruntime=2
+3	RUNNING		5	62	0	20	vruntime=22
+4	READY		5	21	0	20	vruntime=22
+Syscall Exit, remaining 4 -> Success
+
+
+===== Iteration: 19 =====
+Run 4 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	66	2	0	vruntime=2
+4	RUNNING		5	22	0	20	vruntime=22
+Syscall Exit, remaining 9 -> Success
+
+
+===== Iteration: 20 =====
+Sleep for 45 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	SLEEP		0	67	2	0	vruntime=2
+
+
+===== Iteration: 21 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	112	2	0	vruntime=2
+Expired -> Success
+
+
+===== Iteration: 22 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	122	2	10	vruntime=12
+Expired -> Success
+
+
+===== Iteration: 23 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	132	2	20	vruntime=22
+Expired -> Success
+
+
+===== Iteration: 24 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	142	2	30	vruntime=32
+Expired -> Success
+
+
+===== Iteration: 25 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	152	2	40	vruntime=42
+Expired -> Success
+
+
+===== Iteration: 26 =====
+Run 1 for 10 slices
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+1	RUNNING		0	162	2	50	vruntime=52
+Syscall Exit, remaining 9 -> Success
+
+
+===== Iteration: 27 =====
+Done, no more processes
+PID	STATE		PRI	TOTAL	SYSCALL	EXECUTE	EXTRA
+
+
