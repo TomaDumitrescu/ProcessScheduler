@@ -46,6 +46,7 @@ pub struct RoundRobin {
 	pub init_pid: usize,
 	pub current_time: usize,
 	pub panic_state: bool,
+	pub sleep_time: usize,
 }
 
 impl RoundRobin {
@@ -101,11 +102,8 @@ impl Scheduler for RoundRobin {
 
 		let mut min_sleep_time: usize = 1000000;
 		for p in self.sleep_q.iter_mut() {
+			p.timings.0 += self.sleep_time;
 			let time_to_sleep: usize = p.sleep_time;
-
-			if time_to_sleep >= 1 {
-				p.sleep_time -= 1;
-			}
 
 			if p.sleep_time == 0 {
 				self.ready_q.push_back((*p).clone());
@@ -119,6 +117,15 @@ impl Scheduler for RoundRobin {
 		self.sleep_q.retain(|p| p.sleep_time > 0);
 
 		if self.ready_q.is_empty() {
+			for p in self.sleep_q.iter_mut() {
+				if p.sleep_time >= min_sleep_time {
+					p.sleep_time -= min_sleep_time;
+				} else {
+					p.sleep_time = 0;
+				}
+			}
+
+			self.sleep_time = min_sleep_time;
 			return crate::SchedulingDecision::Sleep(NonZeroUsize::new(min_sleep_time).unwrap());
 		}
 
@@ -165,11 +172,15 @@ impl Scheduler for RoundRobin {
 				for p in self.sleep_q.iter_mut() {
 					p.timings.0 += self.timeslice.get() - remaining;
 					if p.sleep_time as i32 - ((self.timeslice.get() - remaining) as i32) < 0 {
-						p.sleep_time = 0;
+						p.sleep_time = 0; 
 					} else {
 						p.sleep_time -= self.timeslice.get() - remaining;
 					}
+
+					p.timings.0 += self.sleep_time;
 				}
+
+				self.sleep_time = 0;
 
 				if !self.ready_q.is_empty() {
 					let mut act_proc = self.ready_q.pop_front().unwrap();

@@ -1,13 +1,21 @@
-# Process Scheduler
+## Copyright 2024 ~ Dumitrescu Toma-Ioan
 
-## Getting started
+## Faculty of Automatic Control and Computer Science
 
-Please run `cargo doc --open` to create and open the documentation.
+## Description
 
-Your job is:
-1. Implement the schedulers in the `scheduler` crate in the folder `scheduler/src/schedulers`.
-2. Export the scheduler in the `scheduler/src/lib.rs` file using the three functions
-   - `round_robin(...)`
-   - `priority_queue(...)`
-   - `cfs(...)`
-3. Test them using the `runner` crate by using them in `runner/src/main.rs`.
+The program resembles a process scheduler with different process
+planing algorithms - Round Robin where processes have equal priorities,
+Round Robin and Completely Fair Scheduler. The algorithms are defined
+in scheduler/src/schedulers by implementing the trait Scheduler multiple
+times. The system is represented by a virtual uniprocessor with an abstract
+time and simulates the behavior of the processes and basic syscalls (fork,
+wait, exit, sleep, signal) in a real 1-core OS. After a syscall, the time
+is tracked using remaining and the actual timeslice of the scheduler and
+a scheduling decision is taken, the decision being identified using an
+enum (SchedulingDecision).
+
+
+## Implementation details
+
+## Bibliography
