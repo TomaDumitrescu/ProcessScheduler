@@ -185,6 +185,7 @@ impl Scheduler for RoundRobin {
 				if !self.ready_q.is_empty() {
 					let mut act_proc = self.ready_q.pop_front().unwrap();
 					act_proc.timings.1 += 1;
+					act_proc.timings.2 += self.timeslice.get() - remaining - 1;
 					self.ready_q.push_front(act_proc);
 				}
 
@@ -267,6 +268,7 @@ impl Scheduler for RoundRobin {
 						if remaining >= self.minimum_remaining_timeslice {
 							act_process.state = ProcessState::Ready;
 						}
+
 						let mut len = self.wait_q.len();
 						let mut idx = 0;
 
