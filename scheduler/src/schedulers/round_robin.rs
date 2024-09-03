@@ -44,7 +44,6 @@ pub struct RoundRobin {
 	pub timeslice: NonZeroUsize,
 	pub minimum_remaining_timeslice: usize,
 	pub init_pid: usize,
-	pub current_time: usize,
 	pub panic_state: bool,
 	pub sleep_time: usize,
 }
@@ -85,8 +84,6 @@ impl RoundRobin {
 
 impl Scheduler for RoundRobin {
 	fn next(&mut self) -> crate::SchedulingDecision {
-		self.current_time += 1;
-
 		if self.panic_verify() {
 			return crate::SchedulingDecision::Panic;
 		}
@@ -101,9 +98,12 @@ impl Scheduler for RoundRobin {
 		}
 
 		let mut min_sleep_time: usize = 1000000;
+		for p in self.wait_q.iter_mut() {
+			p.timings.0 += self.sleep_time;
+		}
+
 		for p in self.sleep_q.iter_mut() {
 			p.timings.0 += self.sleep_time;
-			let time_to_sleep: usize = p.sleep_time;
 
 			if p.sleep_time == 0 {
 				self.ready_q.push_back((*p).clone());
@@ -163,8 +163,6 @@ impl Scheduler for RoundRobin {
 	}
 
 	fn stop(&mut self, reason: crate::StopReason) -> crate::SyscallResult {
-		self.current_time += 1;
-
 		match reason {
 			StopReason::Syscall { syscall, remaining } => {
 				// Check to have a process already
@@ -226,7 +224,7 @@ impl Scheduler for RoundRobin {
 						self.ready_q.push_back(new_proc);
 
 						if remaining != 0 {
-							self.timeslice = NonZeroUsize::new(remaining as usize).unwrap();
+							self.timeslice = NonZeroUsize::new(remaining).unwrap();
 						}
 
 						return SyscallResult::Pid(pid_return);
@@ -265,7 +263,7 @@ impl Scheduler for RoundRobin {
 						}
 
 						let mut act_process = self.ready_q.pop_front().unwrap();
-						if remaining >= self.minimum_remaining_timeslice {
+						if remaining < self.minimum_remaining_timeslice {
 							act_process.state = ProcessState::Ready;
 						}
 
@@ -292,6 +290,15 @@ impl Scheduler for RoundRobin {
 
 							idx += 1;
 						}
+
+						if act_process.state == ProcessState::Ready {
+							self.ready_q.push_back(act_process);
+						} else {
+							act_process.state = ProcessState::Ready;
+							self.ready_q.push_front(act_process);
+						}
+
+						self.timeslice = NonZeroUsize::new(remaining).unwrap();
 
 						return SyscallResult::Success;
 					},

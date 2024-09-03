@@ -37,7 +37,6 @@ pub fn round_robin(timeslice: NonZeroUsize, minimum_remaining_timeslice: usize) 
         timeslice: timeslice,
         minimum_remaining_timeslice: minimum_remaining_timeslice,
         init_pid: 0,
-        current_time: 0,
         panic_state: true,
         sleep_time: 0,
     }
