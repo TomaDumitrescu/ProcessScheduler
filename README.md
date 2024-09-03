@@ -144,6 +144,13 @@ into a VecDeque of type &dyn crate::Process which ProcessInfo implements it.
 Since the order of the displayed process should be increasingly by pid, 
 sort_by_key(|p| p.pid()) method is used on the merged VecDeque.
 
+RoundRobinPQ:
+
+Starting from RoundRobin and adding minor modifications (sorting ready_q by
+priority_queue after making it contiguous, planify_again field because now
+the running process is not at the front of the ready_q, rewarding and
+penalizing processes using a clamp function).
+
 ## Bibliography
 https://doc.rust-lang.org/std/collections/struct.VecDeque.html
 SO Course: Round Robin and scheduling algorithms from pptx
