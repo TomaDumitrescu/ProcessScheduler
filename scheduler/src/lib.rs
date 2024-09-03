@@ -81,14 +81,7 @@ pub fn priority_queue(
 #[allow(unused_variables)]
 pub fn cfs(cpu_time: NonZeroUsize, minimum_remaining_timeslice: usize) -> impl Scheduler {
     CFS {
-        ready_q: VecDeque::new(),
-        wait_q: VecDeque::new(),
-        sleep_q: VecDeque::new(),
         timeslice: cpu_time,
         minimum_remaining_timeslice: minimum_remaining_timeslice,
-        init_pid: 0,
-        panic_state: false,
-        sleep_time: 0,
-        default_timeslice: cpu_time,
     }
 }
