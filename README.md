@@ -18,4 +18,8 @@ enum (SchedulingDecision).
 
 ## Implementation details
 
+Simple Round Robin:
+
+
+
 ## Bibliography
