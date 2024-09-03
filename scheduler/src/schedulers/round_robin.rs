@@ -94,7 +94,7 @@ impl Scheduler for RoundRobin {
 
 		if self.ready_q.is_empty() && self.wait_q.is_empty()
 			&& self.sleep_q.is_empty() {
-				return crate::SchedulingDecision::Done;
+			return crate::SchedulingDecision::Done;
 		}
 
 		let mut min_sleep_time: usize = 1000000;
@@ -106,6 +106,7 @@ impl Scheduler for RoundRobin {
 			p.timings.0 += self.sleep_time;
 
 			if p.sleep_time == 0 {
+				p.state = ProcessState::Ready;
 				self.ready_q.push_back((*p).clone());
 			}
 
@@ -328,18 +329,22 @@ impl Scheduler for RoundRobin {
 			StopReason::Expired => {
 				for p in self.sleep_q.iter_mut() {
 					p.timings.0 += self.timeslice.get();
-					if p.sleep_time as i32 - (self.timeslice.get() as i32) < 0 {
+					if p.sleep_time as i32 - (self.timeslice.get() as i32) <= 0 {
+						p.state = ProcessState::Ready;
+						// It will be added at ready_q
+						p.timings.0 -= self.timeslice.get();
 						p.sleep_time = 0;
+						self.ready_q.push_back((*p).clone());
 					} else {
 						p.sleep_time -= self.timeslice.get();
 					}
 				}
 
-				if !self.ready_q.is_empty() {
-					let mut act_proc = self.ready_q.pop_front().unwrap();
-					act_proc.timings.2 += self.timeslice.get();
-					self.ready_q.push_front(act_proc);
-				}
+				self.sleep_q.retain(|p| p.sleep_time > 0);
+
+				let mut act_proc = self.ready_q.pop_front().unwrap();
+				act_proc.timings.2 += self.timeslice.get();
+				self.ready_q.push_front(act_proc);
 
 				for p in self.ready_q.iter_mut() {
 					p.timings.0 += self.timeslice.get();
