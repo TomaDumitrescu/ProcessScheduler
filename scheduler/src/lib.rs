@@ -63,7 +63,7 @@ pub fn priority_queue(
         timeslice: timeslice,
         minimum_remaining_timeslice: minimum_remaining_timeslice,
         init_pid: 0,
-        panic_state: false,
+        panic_state: true,
         sleep_time: 0,
         default_timeslice: timeslice,
     }

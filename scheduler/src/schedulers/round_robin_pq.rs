@@ -11,8 +11,10 @@ pub struct ProcessInfo {
 	pub state: ProcessState,
 	pub timings: (usize, usize, usize),
 	pub priority: i8,
+	pub initial_priority: i8,
 	pub sleep_time: usize,
 	pub extra: String,
+	pub planify_again: bool,
 }
 
 impl Process for ProcessInfo {
@@ -111,8 +113,8 @@ impl Scheduler for RoundRobinPQ {
 			p.timings.0 += self.sleep_time;
 		}
 
-		// the scheduler sleep time should be minimum for efficiency
-		let mut min_sleep_time: usize = 1000000;
+		// the scheduler sleep time should be determined by the proc priorities
+		let mut highest_priority: i8 = -1;
 		for p in self.sleep_q.iter_mut() {
 			// retaining previous scheduler sleep_time (possibly 0)
 			p.timings.0 += self.sleep_time;
@@ -125,13 +127,23 @@ impl Scheduler for RoundRobinPQ {
 				self.ready_q.push_back((*p).clone());
 			}
 
-			if min_sleep_time > p.sleep_time {
-				min_sleep_time = p.sleep_time;
+			if highest_priority < p.priority {
+				highest_priority = p.priority;
 			}
 		}
 
 		// p.sleep_time = 0, then p is in ready_q
 		self.sleep_q.retain(|p| p.sleep_time > 0);
+
+		// Finding the minimum sleep time
+		let mut min_sleep_time: usize = 1000000;
+		for p in self.sleep_q.iter_mut() {
+			if p.priority == highest_priority {
+				if p.sleep_time < min_sleep_time {
+					min_sleep_time = p.sleep_time;
+				}
+			}
+		}
 
 		// no ready processes to plen, then put scheduler in sleep state
 		if self.ready_q.is_empty() {
@@ -150,6 +162,21 @@ impl Scheduler for RoundRobinPQ {
 		}
 
 		// if code reaches here, then at least one process is ready or running
+		self.ready_q.make_contiguous().sort_by_key(|p| std::cmp::Reverse(p.priority));
+
+		for p in self.ready_q.iter_mut() {
+			if p.state == ProcessState::Running && p.planify_again {
+				p.planify_again = false;
+				return crate::SchedulingDecision::Run {
+					pid: p.pid,
+					timeslice: self.timeslice,
+				};
+			} else if p.state == ProcessState::Running {
+				p.state = ProcessState::Ready;
+			}
+		}
+
+		// the process with highest priority
 		let mut proc = self.ready_q.pop_front().unwrap();
 		let current_pid = proc.pid;
 
@@ -158,7 +185,6 @@ impl Scheduler for RoundRobinPQ {
 			proc.state = ProcessState::Ready;
 		}
 
-		// case for the first fork or a single running process
 		if proc.state == ProcessState::Ready {
 			proc.state = ProcessState::Running;
 			// running process is always on the front of the ready queue
@@ -166,20 +192,6 @@ impl Scheduler for RoundRobinPQ {
 
 			return crate::SchedulingDecision::Run {
 				pid: current_pid,
-				timeslice: self.timeslice,
-			};
-		}
-
-		// plan the next ready process
-		if proc.state == ProcessState::Running {
-			let mut next_proc = self.ready_q.pop_front().unwrap();
-			proc.state = ProcessState::Ready;
-			self.ready_q.push_back(proc);
-			next_proc.state = ProcessState::Running;
-			self.ready_q.push_front(next_proc.clone());
-
-			return crate::SchedulingDecision::Run {
-				pid: next_proc.pid,
 				timeslice: self.timeslice,
 			};
 		}
@@ -221,6 +233,13 @@ impl Scheduler for RoundRobinPQ {
 					act_proc.timings.1 += 1;
 					// only the running process increases the execution time
 					act_proc.timings.2 += self.timeslice.get() - remaining - 1;
+
+					// rewarding the process
+					if act_proc.priority + 1 <= act_proc.initial_priority
+						&& act_proc.priority + 1 <= 5 {
+						act_proc.priority += 1;
+					}
+
 					self.ready_q.push_front(act_proc);
 				}
 
@@ -248,8 +267,10 @@ impl Scheduler for RoundRobinPQ {
 							state: ProcessState::Ready,
 							timings: (0, 0, 0),
 							priority: priority,
+							initial_priority: priority,
 							sleep_time: 0,
 							extra: String::new(),
+							planify_again: false,
 						};
 
 
@@ -257,9 +278,10 @@ impl Scheduler for RoundRobinPQ {
 						if !self.ready_q.is_empty() {
 							let mut prev_proc = self.ready_q.pop_front().unwrap();
 
-							// move from running to ready state to be again planified
+							// the process will be planified again
 							if remaining >= self.minimum_remaining_timeslice {
-								prev_proc.state = ProcessState::Ready;
+								prev_proc.state = ProcessState::Running;
+								prev_proc.planify_again = true;
 							}
 
 							self.ready_q.push_front(prev_proc);
@@ -314,9 +336,12 @@ impl Scheduler for RoundRobinPQ {
 						}
 
 						let mut act_process = self.ready_q.pop_front().unwrap();
+						act_process.planify_again = true;
+
 						// do not planify again the process that sent the signal
 						if remaining < self.minimum_remaining_timeslice {
 							act_process.state = ProcessState::Ready;
+							act_process.planify_again = false;
 						}
 
 						// algorithm to move the waiting process to ready_queue
@@ -400,6 +425,12 @@ impl Scheduler for RoundRobinPQ {
 
 				let mut act_proc = self.ready_q.pop_front().unwrap();
 				act_proc.timings.2 += self.timeslice.get();
+
+				// penalizing the process
+				if act_proc.priority > 0 {
+					act_proc.priority -= 1;
+				}
+
 				self.ready_q.push_front(act_proc);
 
 				for p in self.ready_q.iter_mut() {
