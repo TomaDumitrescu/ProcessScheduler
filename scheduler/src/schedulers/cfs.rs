@@ -47,6 +47,7 @@ pub struct CFS {
 	pub init_pid: usize,
 	pub panic_state: bool,
 	pub sleep_time: usize,
+	pub default_timeslice: NonZeroUsize,
 }
 
 impl CFS {
@@ -118,7 +119,9 @@ impl Scheduler for CFS {
 
 			// eventually find some ready processes to put in the queue
 			if p.sleep_time == 0 {
+				// process state changed here
 				p.state = ProcessState::Ready;
+				// no multiple mutable references allowed
 				self.ready_q.push_back((*p).clone());
 			}
 
@@ -232,7 +235,7 @@ impl Scheduler for CFS {
 				}
 
 				// reset timeslice to default CFS 5 value
-				self.timeslice = NonZeroUsize::new(5).unwrap();
+				self.timeslice = self.default_timeslice;
 
 				match syscall {
 					Syscall::Fork(priority) => {
@@ -269,7 +272,7 @@ impl Scheduler for CFS {
 						if remaining >= self.minimum_remaining_timeslice {
 							self.timeslice = NonZeroUsize::new(remaining).unwrap();
 						} else {
-							self.timeslice = NonZeroUsize::new(5).unwrap();
+							self.timeslice = self.default_timeslice;
 						}
 
 						return SyscallResult::Pid(pid_return);
@@ -323,6 +326,7 @@ impl Scheduler for CFS {
 
 						while idx < len {
 							removed = false;
+							// find the event the process is waiting for using match
 							match self.wait_q[idx].state {
 								ProcessState::Waiting { event: Some(src_num) } => {
 									if src_num == event_num {
@@ -348,7 +352,7 @@ impl Scheduler for CFS {
 
 						// change the timeslice
 						if act_process.state == ProcessState::Ready {
-							self.timeslice = NonZeroUsize::new(5).unwrap();
+							self.timeslice = self.default_timeslice;
 							self.ready_q.push_back(act_process);
 						} else {
 							self.timeslice = NonZeroUsize::new(remaining).unwrap();
@@ -406,7 +410,7 @@ impl Scheduler for CFS {
 					p.timings.0 += self.timeslice.get();
 				}
 
-				self.timeslice = NonZeroUsize::new(5).unwrap();
+				self.timeslice = self.default_timeslice;
 
 				match self.ready_q.pop_front() {
 					Some(mut proc) => {

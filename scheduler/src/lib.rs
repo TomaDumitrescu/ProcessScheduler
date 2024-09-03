@@ -65,6 +65,7 @@ pub fn priority_queue(
         init_pid: 0,
         panic_state: false,
         sleep_time: 0,
+        default_timeslice: timeslice,
     }
 }
 
@@ -88,5 +89,6 @@ pub fn cfs(cpu_time: NonZeroUsize, minimum_remaining_timeslice: usize) -> impl S
         init_pid: 0,
         panic_state: false,
         sleep_time: 0,
+        default_timeslice: cpu_time,
     }
 }
