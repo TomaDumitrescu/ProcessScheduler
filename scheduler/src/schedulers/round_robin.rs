@@ -223,8 +223,10 @@ impl Scheduler for RoundRobin {
 						let pid_return = new_proc.pid;
 						self.ready_q.push_back(new_proc);
 
-						if remaining != 0 {
+						if remaining >= self.minimum_remaining_timeslice {
 							self.timeslice = NonZeroUsize::new(remaining).unwrap();
+						} else {
+							self.timeslice = NonZeroUsize::new(5).unwrap();
 						}
 
 						return SyscallResult::Pid(pid_return);
@@ -269,8 +271,10 @@ impl Scheduler for RoundRobin {
 
 						let mut len = self.wait_q.len();
 						let mut idx = 0;
+						let mut removed;
 
 						while idx < len {
+							removed = false;
 							match self.wait_q[idx].state {
 								ProcessState::Waiting { event: Some(src_num) } => {
 									if src_num == event_num {
@@ -279,9 +283,7 @@ impl Scheduler for RoundRobin {
 
 										self.ready_q.push_back(proc);
 										len -= 1;
-										if idx > 0 {
-											idx -= 1;
-										}
+										removed = true;
 									}
 								},
 
@@ -289,16 +291,19 @@ impl Scheduler for RoundRobin {
 							}
 
 							idx += 1;
+							if removed {
+								idx -= 1;
+							}
 						}
 
 						if act_process.state == ProcessState::Ready {
+							self.timeslice = NonZeroUsize::new(5).unwrap();
 							self.ready_q.push_back(act_process);
 						} else {
+							self.timeslice = NonZeroUsize::new(remaining).unwrap();
 							act_process.state = ProcessState::Ready;
 							self.ready_q.push_front(act_process);
 						}
-
-						self.timeslice = NonZeroUsize::new(remaining).unwrap();
 
 						return SyscallResult::Success;
 					},
