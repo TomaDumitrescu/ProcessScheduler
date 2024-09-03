@@ -39,6 +39,7 @@ pub fn round_robin(timeslice: NonZeroUsize, minimum_remaining_timeslice: usize) 
         init_pid: 0,
         panic_state: true,
         sleep_time: 0,
+        default_timeslice: timeslice,
     }
 }
 
@@ -56,14 +57,14 @@ pub fn priority_queue(
     minimum_remaining_timeslice: usize,
 ) -> impl Scheduler {
     RoundRobinPQ {
-        ready_proc: VecDeque::new(),
-        waiting_queue: VecDeque::new(),
-        sleep_queue: VecDeque::new(),
+        ready_q: VecDeque::new(),
+        wait_q: VecDeque::new(),
+        sleep_q: VecDeque::new(),
         timeslice: timeslice,
         minimum_remaining_timeslice: minimum_remaining_timeslice,
         init_pid: 0,
-        current_time: 0,
         panic_state: false,
+        sleep_time: 0,
     }
 }
 
@@ -79,13 +80,13 @@ pub fn priority_queue(
 #[allow(unused_variables)]
 pub fn cfs(cpu_time: NonZeroUsize, minimum_remaining_timeslice: usize) -> impl Scheduler {
     CFS {
-        ready_proc: VecDeque::new(),
-        waiting_queue: VecDeque::new(),
-        sleep_queue: VecDeque::new(),
+        ready_q: VecDeque::new(),
+        wait_q: VecDeque::new(),
+        sleep_q: VecDeque::new(),
         timeslice: cpu_time,
         minimum_remaining_timeslice: minimum_remaining_timeslice,
         init_pid: 0,
-        current_time: 0,
         panic_state: false,
+        sleep_time: 0,
     }
 }
