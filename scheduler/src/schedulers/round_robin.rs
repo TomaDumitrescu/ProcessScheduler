@@ -172,6 +172,9 @@ impl Scheduler for RoundRobin {
 					p.timings.0 += self.timeslice.get() - remaining;
 					if p.sleep_time as i32 - ((self.timeslice.get() - remaining) as i32) < 0 {
 						p.sleep_time = 0; 
+						p.timings.0 -= self.timeslice.get() - remaining;
+						p.state = ProcessState::Ready;
+						self.ready_q.push_back((*p).clone());
 					} else {
 						p.sleep_time -= self.timeslice.get() - remaining;
 					}
@@ -180,6 +183,7 @@ impl Scheduler for RoundRobin {
 				}
 
 				self.sleep_time = 0;
+				self.sleep_q.retain(|p| p.sleep_time > 0);
 
 				if !self.ready_q.is_empty() {
 					let mut act_proc = self.ready_q.pop_front().unwrap();
