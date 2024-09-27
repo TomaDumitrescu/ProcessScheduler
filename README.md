@@ -1,6 +1,6 @@
-## Copyright 2024 Dumitrescu Toma-Ioan
+### Copyright 2024 Dumitrescu Toma-Ioan
 
-## Description
+### Description
 
 The program resembles a process scheduler with Round Robing planning
 algorithm, defined in scheduler/src/schedulers by implementing the trait
@@ -16,7 +16,7 @@ TIMESLICE=5 REMAINING=2 cargo test --bin "runner" workers -q --features="round-r
 The folder outputs/round-robin contains tests designed for timeslice = 5 and
 remaining = 2, for a round robin scheduler.
 
-## Implementation
+### Implementation
 
 Scheduler @ Simple Round Robin:
 
@@ -121,5 +121,5 @@ Scheduler @ other:
 
 Extension feature by implementing trait scheduler multiple times.
 
-## Bibliography
+### Bibliography
 https://doc.rust-lang.org/
