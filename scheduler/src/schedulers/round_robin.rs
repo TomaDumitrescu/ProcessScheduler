@@ -133,7 +133,7 @@ impl Scheduler for RoundRobin {
 		// p.sleep_time = 0, then p is in ready_q
 		self.sleep_q.retain(|p| p.sleep_time > 0);
 
-		// no ready processes to plen, then put scheduler in sleep state
+		// no ready processes to plan, then put scheduler in sleep state
 		if self.ready_q.is_empty() {
 			for p in self.sleep_q.iter_mut() {
 				// simulate sleeping time
@@ -251,7 +251,6 @@ impl Scheduler for RoundRobin {
 							sleep_time: 0,
 							extra: String::new(),
 						};
-
 
 						// this allows unwrap
 						if !self.ready_q.is_empty() {

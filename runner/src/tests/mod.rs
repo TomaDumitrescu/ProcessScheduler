@@ -1,7 +1,3 @@
-#[cfg(feature = "cfs")]
-use scheduler::cfs;
-#[cfg(feature = "priority-queue")]
-use scheduler::priority_queue;
 #[cfg(not(any(feature = "priority-queue", feature = "cfs")))]
 use scheduler::round_robin;
 use scheduler::Scheduler;
@@ -77,27 +73,6 @@ fn scheduler() -> impl Scheduler {
 
     println!("Timeslice {timeslice}\nRemaining {remaining}\nCPU slices: {cpu_slices}");
     round_robin(NonZeroUsize::new(timeslice).unwrap(), remaining)
-}
-
-#[cfg(feature = "priority-queue")]
-static SCHEDULER: &str = "priority-queue";
-#[cfg(feature = "priority-queue")]
-fn scheduler() -> impl Scheduler {
-    let (timeslice, remaining, cpu_slices) = arguments();
-
-    println!("Timeslice {timeslice}\nRemaining {remaining}\nCPU slices: {cpu_slices}");
-
-    priority_queue(NonZeroUsize::new(timeslice).unwrap(), remaining)
-}
-
-#[cfg(feature = "cfs")]
-static SCHEDULER: &str = "cfs";
-#[cfg(feature = "cfs")]
-fn scheduler() -> impl Scheduler {
-    let (timeslice, remaining, cpu_slices) = arguments();
-
-    println!("Timeslice {timeslice}\nRemaining {remaining}\nCPU slices: {cpu_slices}");
-    cfs(NonZeroUsize::new(cpu_slices).unwrap(), remaining)
 }
 
 #[cfg(not(any(feature = "round-robin", feature = "priority-queue", feature = "cfs")))]
